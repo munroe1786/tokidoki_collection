@@ -8,7 +8,7 @@
             "color": "White",
             "release_year": "2012",
             "unique_features": "First Unicorno created, with 1 yellow and 2 red stars on her body and a multi-colored mane",
-            "photoUrl": "https://dtpmhvbsmffsz.cloudfront.net/posts/2016/02/08/56b8d59df0137d854204dd16/m_56b8d59df0137d854204dd17.jpg"
+            "photo_url": "https://dtpmhvbsmffsz.cloudfront.net/posts/2016/02/08/56b8d59df0137d854204dd16/m_56b8d59df0137d854204dd17.jpg"
         },
         {
             "id": 2,
@@ -18,7 +18,7 @@
             "color": "Grey",
             "release_year": "2017",
             "unique_features": "Light grey body with darker grey tail and mane, shark image on his side and shark tooth necklace",
-            "photoUrl": "https://s3.amazonaws.com/trampt/images/products/000/301/699/Mermicorno_-_Sharkbite-Tokidoki_Simone_Legno-Mermicorno-Tokidoki-trampt-301699o.jpg?1550374381"
+            "photo_url": "https://s3.amazonaws.com/trampt/images/products/000/301/699/Mermicorno_-_Sharkbite-Tokidoki_Simone_Legno-Mermicorno-Tokidoki-trampt-301699o.jpg?1550374381"
         }
     ]
 }
