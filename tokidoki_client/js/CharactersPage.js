@@ -11,16 +11,16 @@ class FamiliesPage {
     renderForm() {
         return `
             <form class="">
-                <h3>Add Character</h3>
+                <h3>Add a Family</h3>
                 <p>
                     <label class="db">Name</label>
                     <input type="text" name="name" value="${this.formState.name}" />
                 </p>
                 <p>
-                    <label class="db">Description</label>
-                    <input type="text" name="description" value="${this.formState.description}" />
+                    <label class="db">Photo</label>
+                    <input type="text" name="photo_url" value="${this.formState.photo_url}" />
                 </p>
-                <input type="submit" value="Add Character" />
+                <input type="submit" value="Add Family" />
             </form>
         `
     }
