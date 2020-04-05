@@ -12,11 +12,11 @@ class CharactersPage {
         return `
             <form class="addCharacter">
                 <p>
-                    <label>Name</label>
+                    <label class="db">Name</label>
                     <input type="text" name="name" value="${this.formState.name}" />
                 </p>
                 <p>
-                    <label>Family</label>
+                    <label class="db">Family</label>
                     <input type="text" name="family" value="${this.formState.family}" />
                 </p>
                 <input type="submit" value="Add Character" />
@@ -30,6 +30,7 @@ class CharactersPage {
     render() {
         return `
         <h1>Hello from Characters Page</h1>
+        ${this.renderForm()}
         `
     }
 }
