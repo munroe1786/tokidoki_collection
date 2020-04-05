@@ -1,16 +1,16 @@
-class CharactersPage {
+class FamiliesPage {
     
     constructor() {
-        this.characters = []
+        this.families = []
         this.formState = {
             name: '',
-            description: ''
+            photo_url: ''
         }
     }
 
     renderForm() {
         return `
-            <form class="addCharacter">
+            <form class="">
                 <h3>Add Character</h3>
                 <p>
                     <label class="db">Name</label>

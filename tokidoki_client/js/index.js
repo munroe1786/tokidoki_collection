@@ -1,14 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     let root = document.getElementById('root')
-    root.innerHTML = new CharactersPage().render()
+    root.innerHTML = new FamiliesPage().render()
 })
 
-let stellina = new Character({
+let unicorno = new Family({
     id: 1,
-    name: "Stellina",
-    description: "Stars and a rainbow mane",
-    series: "1",
-    release_year: "2012",
-    photo_url: "https://dtpmhvbsmffsz.cloudfront.net/posts/2016/02/08/56b8d59df0137d854204dd16/m_56b8d59df0137d854204dd17.jpg",
-    family_id: 1
+    name: "Unicorno",
+    photo_url: "https://cdn.shopify.com/s/files/1/2429/5791/files/ch-logo-3.png?v=1539599448",
 })
