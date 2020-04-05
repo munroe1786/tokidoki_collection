@@ -10,25 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_135402) do
+ActiveRecord::Schema.define(version: 2020_04_05_181211) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
-    t.string "family"
     t.string "description"
+    t.string "series"
     t.string "release_year"
     t.string "photo_url"
-    t.integer "series_id"
+    t.integer "family_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["series_id"], name: "index_characters_on_series_id"
+    t.index ["family_id"], name: "index_characters_on_family_id"
   end
 
-  create_table "series", force: :cascade do |t|
-    t.string "number"
+  create_table "families", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "characters", "series"
+  add_foreign_key "characters", "families"
 end

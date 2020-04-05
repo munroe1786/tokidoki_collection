@@ -1,3 +1,3 @@
 class Character < ApplicationRecord
-    belongs_to :series
+    belongs_to :family
 end
