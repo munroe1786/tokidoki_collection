@@ -20,13 +20,13 @@ class Character {
         article.innerHTML = `
             <div class="aspect-ratio aspect-ratio--1x1">
                 <img style="background-image:url(${this.photo_url});"
-                class=db bg-center cover aspect-ratio--object" />
+                class="db bg-center cover aspect-ratio--object" />
             </div>
             <a href="#0" class="ph2 ph0-ns pb3 link db">
-                <h3 class="f5-ns mb0 black-90">${this.name}</h3>
+                <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
                 <h3 class="f6 f5 fw4 mt2 black-60">${this.family}</h3>
             </a>
-            <p>button class="editCharacter" data-id="${this.id}">Edit Character</button></p>
+            <p><button class="editCharacter" data-id="${this.id}">Edit Character</button></p>
             `
         return article
     }
