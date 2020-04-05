@@ -4,7 +4,7 @@ class CharactersPage {
         this.characters = []
         this.formState = {
             name: '',
-            family: ''
+            description: ''
         }
     }
 
@@ -17,8 +17,8 @@ class CharactersPage {
                     <input type="text" name="name" value="${this.formState.name}" />
                 </p>
                 <p>
-                    <label class="db">Family</label>
-                    <input type="text" name="family" value="${this.formState.family}" />
+                    <label class="db">Description</label>
+                    <input type="text" name="description" value="${this.formState.description}" />
                 </p>
                 <input type="submit" value="Add Character" />
             </form>
