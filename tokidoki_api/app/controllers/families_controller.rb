@@ -7,7 +7,9 @@ class FamiliesController < ApplicationController
     end
 
     def show
-        render json: FamilySerializer.new(@family).serialized_json
+        options = {}
+        options[:include] = [:characters, :'characters.name', :'characters.description', :'characters.series', :'characters.release_year', :'characters.photo_url', :'characters.family_id']
+        render json: FamilySerializer.new(@family, options).serialized_json
     end
 
     private
