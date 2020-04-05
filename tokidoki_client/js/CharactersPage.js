@@ -11,6 +11,7 @@ class CharactersPage {
     renderForm() {
         return `
             <form class="addCharacter">
+                <h3>Add Character</h3>
                 <p>
                     <label class="db">Name</label>
                     <input type="text" name="name" value="${this.formState.name}" />
@@ -29,7 +30,7 @@ class CharactersPage {
     
     render() {
         return `
-        <h1>Hello from Characters Page</h1>
+        <h1>Welcome to Tokidoki Collection</h1>
         ${this.renderForm()}
         `
     }
