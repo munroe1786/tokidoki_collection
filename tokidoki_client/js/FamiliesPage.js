@@ -25,9 +25,6 @@ class FamiliesPage {
         `
     }
 
-    
-    
-    
     render() {
         return `
         <h1>Welcome to Tokidoki Collection</h1>
