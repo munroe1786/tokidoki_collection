@@ -5,6 +5,19 @@ class Family {
         this.photo_url = photo_url
     }
 
+    static getAll() {
+        if(Family.all.length === 0) {
+            FamilyAPI.getFamilies().then(families => {
+                Family.all = families.map(familyAttributes => 
+                    new Family(familyAttributes)
+                )
+                return Promise.resolve(Family.all)
+            })
+        } else {
+            return Promise.resolve(Family.all)
+        }
+    }
+
     photoHtml() {
         return `<img src="${this.photo_url}" />`
     }  
@@ -26,3 +39,5 @@ class Family {
         return article
     }
 }
+
+Family.all = []

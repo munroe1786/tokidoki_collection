@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     root.innerHTML = new FamiliesPage().render()
 })
 
-let unicorno = new Family({
-    id: 1,
-    name: "Unicorno",
-    photo_url: "",
-})
+//let unicorno = new Family({
+ //   id: 1,
+ //   name: "Unicorno",
+ //   photo_url: "",
+//})
