@@ -29,6 +29,7 @@ class FamiliesPage {
         return `
         <h1>Welcome to Tokidoki Collection</h1>
         ${this.renderForm()}
+        ${this.renderList()}
         `
     }
 }

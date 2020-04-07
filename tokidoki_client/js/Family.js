@@ -7,11 +7,11 @@ class Family {
 
     static getAll() {
         if(Family.all.length === 0) {
-            FamilyAPI.getFamilies().then(families => {
+            return FamilyAPI.getFamilies().then(families => {
                 Family.all = families.map(familyAttributes => 
                     new Family(familyAttributes)
                 )
-                return Promise.resolve(Family.all)
+                return Family.all
             })
         } else {
             return Promise.resolve(Family.all)
@@ -36,7 +36,7 @@ class Family {
             </a>
             <p><button class="editCharacter" data-id="${this.id}">Edit Character</button></p>
             `
-        return article
+        return article.outerHTML
     }
 }
 
