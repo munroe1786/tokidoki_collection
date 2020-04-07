@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-families = Family.create([{ name: "Unicorno", photo_url: "" }, { name: "Mermicorno", photo_url: ""}, { name: "Cactus Friends", photo_url: ""}, { name: "Donutella and Her Sweet Friends", photo_url: ""}, { name: "Punkstar", photo_url: ""}, { name: "Til Death Do Us Part", photo_url: ""}])
+families = Family.create([{ name: "Unicorno", photo_url: "https://cdn.shopify.com/s/files/1/2429/5791/files/ch-logo-3.png?v=1539599448" }, { name: "Mermicorno", photo_url: ""}, { name: "Cactus Friends", photo_url: ""}, { name: "Donutella and Her Sweet Friends", photo_url: ""}, { name: "Punkstar", photo_url: ""}, { name: "Til Death Do Us Part", photo_url: ""}])
 
 Character.create(name: "Stellina", description: "First Unicorno released. White with 2 red stars and 1 yellow star, with a rainbow mane.", series: "1", release_year: "2012", photo_url: "", family_id: 1)
 
