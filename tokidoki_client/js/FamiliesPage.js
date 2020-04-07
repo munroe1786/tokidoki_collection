@@ -1,7 +1,7 @@
 class FamiliesPage {
     
-    constructor() {
-        this.families = []
+    constructor(families) {
+        this.families = families
         this.formState = {
             name: '',
             photo_url: ''
@@ -10,7 +10,7 @@ class FamiliesPage {
 
     renderForm() {
         return `
-            <form class="">
+            <form class="addFamily">
                 <h3>Add a Family</h3>
                 <p>
                     <label class="db">Name</label>
@@ -25,11 +25,17 @@ class FamiliesPage {
         `
     }
 
+    renderList() {
+        return this.families.map(family => {
+            return family.renderCard()
+        }).join('')
+    }
+
     render() {
         return `
         <h1>Welcome to Tokidoki Collection</h1>
         ${this.renderForm()}
         ${this.renderList()}
-        `
+    `
     }
 }

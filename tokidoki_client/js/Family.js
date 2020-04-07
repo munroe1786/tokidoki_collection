@@ -18,14 +18,14 @@ class Family {
         }
     }
 
-    photoHtml() {
-        return `<img src="${this.photo_url}" />`
-    }  
+    //photoHtml() {
+    //    return `<img src="${this.photo_url}" />`
+    //}  
 
     renderCard() {
         let article = document.createElement('article')
-        article.class = "fl w-100 w-50-m w-25-ns pa2-ns"
-        article.dataset['character_id'] = this.id
+        article.className = "fl w-100 w-50-m w-25-ns pa2-ns"
+        article.dataset['family_id'] = this.id
         article.innerHTML = `
             <div class="aspect-ratio aspect-ratio--1x1">
                 <img style="background-image:url(${this.photo_url});"
@@ -34,7 +34,7 @@ class Family {
             <a href="#0" class="ph2 ph0-ns pb3 link db">
                 <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
             </a>
-            <p><button class="editCharacter" data-id="${this.id}">Edit Character</button></p>
+            <p><button class="editFamily" data-id="${this.id}">Edit Family</button></p>
             `
         return article.outerHTML
     }
