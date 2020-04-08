@@ -75,6 +75,18 @@ class Family {
         return Family.all.find(family => family.id == id)
     }
 
+    static create(familyAttributes) {
+        return FamilyAPI.createFamily(familyAttributes)
+            .then(familyJSON => {
+                return new Family(familyJSON).save()
+            })
+    }
+
+    save() {
+        Character.all.push(this)
+        return this
+    }
+
     getFamilyDetails() {
         if(this.characters().length === 0) {
           return FamilyAPI.getFamilyShow(this.id)
@@ -90,10 +102,6 @@ class Family {
     characters() {
         return Character.all.filter(character => character.family_id == this.id)
     }
-
-    //photoHtml() {
-    //    return `<img src="${this.photo_url}" />`
-    //}  
 
     renderCard() {
         let article = document.createElement('article')
@@ -151,10 +159,10 @@ class FamiliesPage {
     
     constructor(families) {
         this.families = families
-        this.formState = {
-            name: '',
-            photo_url: ''
-        }
+        //this.formState = {
+            //name: '',
+            //photo_url: ''
+        //}
     }
 
     renderForm() {
@@ -163,11 +171,11 @@ class FamiliesPage {
                 <h3>Add a Family</h3>
                 <p>
                     <label class="db">Name</label>
-                    <input type="text" name="name" value="${this.formState.name}" />
+                    <input type="text" name="name" id="name" />
                 </p>
                 <p>
                     <label class="db">Photo</label>
-                    <input type="text" name="photo_url" value="${this.formState.photo_url}" />
+                    <input type="text" name="photo_url" id="photo_url" />
                 </p>
                 <input type="submit" value="Add Family" />
             </form>
@@ -231,6 +239,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if(e.target.matches('.familiesIndex')) {
             root.innerHTML = new FamiliesPage(Family.all).render()
+        }
+    })
+    document.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if(e.target.matches('.addFamily')) {
+            let formData = {}
+            e.target.querySelectorAll('input[type="text"]').forEach(input => formData[input.id] = input.value)
+            Family.create(formData)
+                .then(family => {
+                    document.querySelector('#families').insertAdjacentHTML('beforeend', family.renderCard())
+                })
         }
     })
 })
