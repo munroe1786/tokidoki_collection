@@ -35,6 +35,18 @@ class FamilyAPI {
             }
         })
     }
+
+    static createFamily(familyAttributes) {
+        return fetch(`${FamilyAPI.base_url}/families`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(familyAttributes)
+        })
+        .then(res => res.json())
+    }
 }
 
 FamilyAPI.base_url = "http://localhost:3000"
