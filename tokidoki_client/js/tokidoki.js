@@ -51,6 +51,26 @@ class FamilyAPI {
 
 FamilyAPI.base_url = "http://localhost:3000"
 
+class CharacterAPI {
+    static getCharacters() {
+        return fetch(`${CharacterAPI.base_url}/characters`).then(res => res.json())
+    }
+
+    static createCharacter(characterAttributes) {
+        return fetch(`${CharacterAPI.base_url}/characters`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(characterAttributes)
+        })
+        .then(res => res.json())
+    }
+}
+
+CharacterAPI.base_url = "http://localhost:3000"
+
 class Family {
     constructor({ id, name, photo_url }) {
         this.id = id
@@ -133,6 +153,13 @@ class Character {
         this.release_year = release_year
         this.photo_url = photo_url
         this.family_id = family_id
+    }
+
+    static create(characterAttributes) {
+        return CharacterAPI.createCharacter(characterAttributes)
+            .then(characterJSON => {
+                return new Character(characterJSON).save()
+            })
     }
 
     static findOrCreateBy(attributes) {
