@@ -33,8 +33,7 @@ class FamilyAPI {
                     }
                 })
             }
-            debugger
-            })
+        })
     }
 }
 
@@ -68,8 +67,8 @@ class Family {
         if(this.characters().length === 0) {
           return FamilyAPI.getFamilyShow(this.id)
             .then(({characters}) => {
-                return characters.map(characterAttributes => Character.findOrCreateBy(characterAttributes)
-                )
+                characters.map(characterAttributes => Character.findOrCreateBy(characterAttributes))
+                return this
             })  
         } else {
             return Promise.resolve(this)
@@ -116,21 +115,21 @@ class Character {
         this.family_id = family_id
     }
 
-static findOrCreateBy(attributes) {
+    static findOrCreateBy(attributes) {
     let found = Character.all.find(character => character.id == attributes.id)
     return found ? found : new Character(attributes).save()
-}
+    }
 
-save() {
-    Character.all.push(this)
-    return this
-}
+    save() {
+        Character.all.push(this)
+        return this
+    }
 
-render() {
-    return `
-    <li>${this.name}</li>
-    `
-}
+    render() {
+        return `
+        <li>${this.name}</li>
+        `
+    }
 
 }
 
@@ -186,9 +185,7 @@ class FamilyShowPage {
     renderCharacterList() {
         let ul = document.createElement('ul')
         this.family.characters().forEach(character => {
-            let li = document.createElement('li')
-            li.innerText
-            ul.appendChild
+            ul.insertAdjacentHTML('beforeend', character.render())
         })
         return ul.outerHTML
     }
@@ -196,13 +193,12 @@ class FamilyShowPage {
     render() {
         return `
         <div class="aspect-ratio aspect-ratio--1x1">
-            <img style="background-image:url(${this.photo_url});"
+            <img style="background-image:url(${this.family.photo_url});"
             class="db bg-center cover aspect-ratio--object" />
         </div>
-        <a href="#0" class="ph2 ph0-ns pb3 link db">
-            <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
-            <h3 class="f6 f5 fw4 mt2 black-60">${this.character_name}</h3>
-        </a>
+        <div class="ph2 ph0-ns pb3 link db">
+            <h3 class="f5 f4-ns mb0 black-90">${this.family.name}</h3>
+        </div>
         ${this.renderCharacterList()}
         `
     }
@@ -218,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target.matches('.familyShow')) {
             let family = Family.findById(e.target.dataset.familyid)
             family.getFamilyDetails().then(family => {
-                debugger
+                root.innerHTML = new FamilyShowPage(family).render()
             })
         }
     })
