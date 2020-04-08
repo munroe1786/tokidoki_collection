@@ -60,7 +60,11 @@ class Family {
         }
     }
 
-    getCharacters() {
+    static findById(id) {
+        return Family.all.find(family => family.id == id)
+    }
+
+    getFamilyDetails() {
         if(this.characters().length === 0) {
           return FamilyAPI.getFamilyShow(this.id)
             .then(({characters}) => {
@@ -68,7 +72,7 @@ class Family {
                 )
             })  
         } else {
-            return Promise.resolve(this.characters())
+            return Promise.resolve(this)
         }
     }
 
@@ -92,7 +96,8 @@ class Family {
             <a href="#0" class="ph2 ph0-ns pb3 link db">
                 <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
             </a>
-            <p><button class="editFamily" data-id="${this.id}">Edit Family</button></p>
+            <p><a href="#/families/${this.id}" class="familyShow ba1 pa2 bg-moon-gray
+            link" data-familyid="${this.id}">Character Details</a></p>
             `
         return article.outerHTML
     }
@@ -119,6 +124,12 @@ static findOrCreateBy(attributes) {
 save() {
     Character.all.push(this)
     return this
+}
+
+render() {
+    return `
+    <li>${this.name}</li>
+    `
 }
 
 }
@@ -167,11 +178,49 @@ class FamiliesPage {
     }
 }
 
+class FamilyShowPage {
+    constructor(family) {
+        this.family = family
+    }
+
+    renderCharacterList() {
+        let ul = document.createElement('ul')
+        this.family.characters().forEach(character => {
+            let li = document.createElement('li')
+            li.innerText
+            ul.appendChild
+        })
+        return ul.outerHTML
+    }
+
+    render() {
+        return `
+        <div class="aspect-ratio aspect-ratio--1x1">
+            <img style="background-image:url(${this.photo_url});"
+            class="db bg-center cover aspect-ratio--object" />
+        </div>
+        <a href="#0" class="ph2 ph0-ns pb3 link db">
+            <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
+            <h3 class="f6 f5 fw4 mt2 black-60">${this.character_name}</h3>
+        </a>
+        ${this.renderCharacterList()}
+        `
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     let root = document.getElementById('root')
     root.innerHTML = loadingGif()
     Family.getAll().then(families => {
         root.innerHTML = new FamiliesPage(families).render()
+    })
+    document.addEventListener('click', (e) => {
+        if(e.target.matches('.familyShow')) {
+            let family = Family.findById(e.target.dataset.familyid)
+            family.getFamilyDetails().then(family => {
+                debugger
+            })
+        }
     })
 })
 
