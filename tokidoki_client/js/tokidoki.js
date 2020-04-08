@@ -217,6 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 root.innerHTML = new FamilyShowPage(family).render()
             })
         }
+        if(e.target.matches('.familiesIndex')) {
+            root.innerHTML = new FamiliesPage(Family.all).render()
+        }
     })
 })
 
