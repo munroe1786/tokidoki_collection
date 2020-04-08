@@ -12,6 +12,16 @@ class FamiliesController < ApplicationController
         render json: FamilySerializer.new(@family, options).serialized_json
     end
 
+    def create
+        @family = Family.new(family_params)
+        if @family.save
+            render json: @family, status: :created, location: @family
+        else
+            render json: @family.errors, status: :unprocessable_entity
+        end
+    end
+    
+
     private
 
         def set_family
