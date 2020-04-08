@@ -60,6 +60,22 @@ class Family {
         }
     }
 
+    getCharacters() {
+        if(this.characters().length === 0) {
+          return FamilyAPI.getFamilyShow(this.id)
+            .then(({characters}) => {
+                return characters.map(characterAttributes => Character.findOrCreateBy(characterAttributes)
+                )
+            })  
+        } else {
+            return Promise.resolve(this.characters())
+        }
+    }
+
+    characters() {
+        return Character.all.filter(character => character.family_id == this.id)
+    }
+
     //photoHtml() {
     //    return `<img src="${this.photo_url}" />`
     //}  
@@ -83,6 +99,31 @@ class Family {
 }
 
 Family.all = []
+
+class Character {
+    constructor({id, name, description, series, release_year, photo_url, family_id}) {
+        this.id = id
+        this.name = name
+        this.description = description
+        this.series = series
+        this.release_year = release_year
+        this.photo_url = photo_url
+        this.family_id = family_id
+    }
+
+static findOrCreateBy(attributes) {
+    let found = Character.all.find(character => character.id == attributes.id)
+    return found ? found : new Character(attributes).save()
+}
+
+save() {
+    Character.all.push(this)
+    return this
+}
+
+}
+
+Character.all = []
 
 class FamiliesPage {
     
