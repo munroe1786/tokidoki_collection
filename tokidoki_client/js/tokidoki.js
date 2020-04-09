@@ -172,12 +172,6 @@ class Character {
         return this
     }
 
-    //render() {
-        //return `
-        //<li>${this.name}</li>
-        //`
-    //}
-
     renderCard() {
         let article = document.createElement('article')
         article.className = "fl w-100 w-50-m w-25-ns pa2-ns"
@@ -191,13 +185,13 @@ class Character {
                 <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
             </a>
             <a href="#0" class="ph2 ph0-ns pb3 link db">
-                <h3 class="f5 f4-ns mb0 black-90">${this.description}</h3>
-            </a>
-            <a href="#0" class="ph2 ph0-ns pb3 link db">
                 <h3 class="f5 f4-ns mb0 black-90">Series: ${this.series}</h3>
             </a>
             <a href="#0" class="ph2 ph0-ns pb3 link db">
                 <h3 class="f5 f4-ns mb0 black-90">Release Year: ${this.release_year}</h3>
+            </a>
+            <a href="#0" class="ph2 ph0-ns pb3 link db">
+                <h3 class="f5 f4-ns mb0 black-90">${this.description}</h3>
             </a>
             `
         return article.outerHTML
@@ -269,6 +263,18 @@ class FamilyShowPage {
                     <input type="text" name="name" id="name" />
                 </p>
                 <p>
+                    <label class="db">Series</label>
+                    <input type="text" name="series" id="series" />
+                </p>
+                <p>
+                <label class="db">Release Year</label>
+                <input type="text" name="release_year" id="release_year" />
+                </p>
+                <p>
+                    <label class="db">Description</label>
+                    <input type="text" name="description" id="description" />
+                </p>
+                <p>
                     <label class="db">Photo</label>
                     <input type="text" name="photo_url" id="photo_url" />
                 </p>
@@ -286,8 +292,8 @@ class FamilyShowPage {
         <div class="ph2 ph0-ns pb3 link db">
             <h3 class="f5 f4-ns mb0 black-90">${this.family.name}</h3>
         </div>
-        ${this.renderCharacterList()}
         ${this.renderForm()}
+        ${this.renderCharacterList()}
         `
     }
 }
