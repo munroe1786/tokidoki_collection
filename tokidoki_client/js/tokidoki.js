@@ -128,13 +128,10 @@ class Family {
         article.className = "fl w-100 w-50-m w-25-ns pa2-ns"
         article.dataset['family_id'] = this.id
         article.innerHTML = `
-            <div class="aspect-ratio aspect-ratio--1x1">
-                <img style="background-image:url(${this.photo_url});"
-                class="db bg-center cover aspect-ratio--object" />
+            <div>
+                <img src="${this.photo_url}"
+                class="db" />
             </div>
-            <a href="#0" class="ph2 ph0-ns pb3 link db">
-                <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
-            </a>
             <p><a href="#/families/${this.id}" class="familyShow ba1 pa2 bg-moon-gray
             link" data-familyid="${this.id}">Character Details</a></p>
             `
