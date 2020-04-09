@@ -103,7 +103,7 @@ class Family {
     }
 
     save() {
-        Character.all.push(this)
+        Family.all.push(this)
         return this
     }
 
@@ -172,12 +172,36 @@ class Character {
         return this
     }
 
-    render() {
-        return `
-        <li>${this.name}</li>
-        `
-    }
+    //render() {
+        //return `
+        //<li>${this.name}</li>
+        //`
+    //}
 
+    renderCard() {
+        let article = document.createElement('article')
+        article.className = "fl w-100 w-50-m w-25-ns pa2-ns"
+        article.dataset['character_id'] = this.id
+        article.innerHTML = `
+            <div class="aspect-ratio aspect-ratio--1x1">
+                <img style="background-image:url(${this.photo_url});"
+                class="db bg-center cover aspect-ratio--object" />
+            </div>
+            <a href="#0" class="ph2 ph0-ns pb3 link db">
+                <h3 class="f5 f4-ns mb0 black-90">${this.name}</h3>
+            </a>
+            <a href="#0" class="ph2 ph0-ns pb3 link db">
+                <h3 class="f5 f4-ns mb0 black-90">${this.description}</h3>
+            </a>
+            <a href="#0" class="ph2 ph0-ns pb3 link db">
+                <h3 class="f5 f4-ns mb0 black-90">Series: ${this.series}</h3>
+            </a>
+            <a href="#0" class="ph2 ph0-ns pb3 link db">
+                <h3 class="f5 f4-ns mb0 black-90">Release Year: ${this.release_year}</h3>
+            </a>
+            `
+        return article.outerHTML
+    }
 }
 
 Character.all = []
@@ -186,10 +210,6 @@ class FamiliesPage {
     
     constructor(families) {
         this.families = families
-        //this.formState = {
-            //name: '',
-            //photo_url: ''
-        //}
     }
 
     renderForm() {
@@ -222,7 +242,6 @@ class FamiliesPage {
         <section id ="families">
             ${this.renderList()}
         </section>    
-
     `
     }
 }
@@ -234,29 +253,47 @@ class FamilyShowPage {
 
     renderCharacterList() {
         let ul = document.createElement('ul')
+        ul.id = "characters"
         this.family.characters().forEach(character => {
-            ul.insertAdjacentHTML('beforeend', character.render())
+            ul.insertAdjacentHTML('beforeend', character.renderCard())
         })
         return ul.outerHTML
     }
 
+    renderForm() {
+        return `
+            <form class="addCharacter" data-family_id="${this.family.id}">
+                <h3>Add a Character</h3>
+                <p>
+                    <label class="db">Name</label>
+                    <input type="text" name="name" id="name" />
+                </p>
+                <p>
+                    <label class="db">Photo</label>
+                    <input type="text" name="photo_url" id="photo_url" />
+                </p>
+                <input type="submit" value="Add Character" />
+            </form>
+        `
+    }
+
     render() {
         return `
-        <div class="aspect-ratio aspect-ratio--1x1">
-            <img style="background-image:url(${this.family.photo_url});"
-            class="db bg-center cover aspect-ratio--object" />
+        <div>
+            <img src="${this.family.photo_url}"
+            class="db" />
         </div>
         <div class="ph2 ph0-ns pb3 link db">
             <h3 class="f5 f4-ns mb0 black-90">${this.family.name}</h3>
         </div>
         ${this.renderCharacterList()}
+        ${this.renderForm()}
         `
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     let root = document.getElementById('root')
-    root.innerHTML = loadingGif()
     Family.getAll().then(families => {
         root.innerHTML = new FamiliesPage(families).render()
     })
@@ -276,23 +313,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target.matches('.addFamily')) {
             let formData = {}
             e.target.querySelectorAll('input[type="text"]').forEach(input => formData[input.id] = input.value)
-            Family.create(formData)
+            Family.create({family: formData})
                 .then(family => {
                     document.querySelector('#families').insertAdjacentHTML('beforeend', family.renderCard())
                 })
+        } 
+        if (e.target.matches(".addCharacter")) {
+            e.preventDefault()
+            let formData = {}
+            e.target.querySelectorAll('input[type="text"]').forEach(input => formData[input.id] = input.value)
+            formData.family_id = e.target.dataset.family_id
+            Character.create(formData)
+                .then(character => {
+                    document.querySelector('#characters').insertAdjacentHTML('beforeend', character.renderCard())
+                })
+                    
         }
     })
 })
-
-//let unicorno = new Family({
-//    id: 1,
-//    name: "Unicorno",
-//    photo_url: "",
-//})
-
-const loadingGif = () => {
-    let loading = document.createElement('img')
-    loading.src = 'https://i.giphy.com/media/y1ZBcOGOOtlpC/giphy.webp'
-    return loading.outerHTML
-}
-
