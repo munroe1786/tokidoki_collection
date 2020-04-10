@@ -9,6 +9,7 @@ Ruby version 2.6.1 is used for this project.
 To install, fork and clone this repository.
 
 System dependencies:
+    
     gem "fast_jsonapi", "~> 1.5"
     
     gem 'rails', '~> 6.0.2', '>= 6.0.2.2' then run bundle install
