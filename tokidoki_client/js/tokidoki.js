@@ -125,14 +125,14 @@ class Family {
 
     renderCard() {
         let article = document.createElement('article')
-        article.className = "fl w-100 w-50-m w-25-ns pa2-ns"
+        article.className = "fl w-100 w-50-mw-25-ns pa2-ns"
         article.dataset['family_id'] = this.id
         article.innerHTML = `
             <div>
                 <img src="${this.photo_url}"
                 class="db" />
             </div>
-            <p><a href="#/families/${this.id}" class="familyShow ba1 pa2 bg-moon-gray
+            <p><a href="#/families/${this.id}" class="familyShow ba1 pa2 bg-light-green
             link" data-familyid="${this.id}">Character Details</a></p>
             `
         return article.outerHTML
@@ -206,7 +206,7 @@ class FamiliesPage {
     renderForm() {
         return `
             <form class="addFamily">
-                <h3>Add a Family</h3>
+                <h3>Add a Character Family below.  Click on Character Details to view Characters in each Family. </h3>
                 <p>
                     <label class="db">Name</label>
                     <input type="text" name="name" id="name" />
@@ -216,6 +216,8 @@ class FamiliesPage {
                     <input type="text" name="photo_url" id="photo_url" />
                 </p>
                 <input type="submit" value="Add Family" />
+                <br><br>
+                <br><br>
             </form>
         `
     }
@@ -285,9 +287,6 @@ class FamilyShowPage {
         <div>
             <img src="${this.family.photo_url}"
             class="db" />
-        </div>
-        <div class="ph2 ph0-ns pb3 link db">
-            <h3 class="f5 f4-ns mb0 black-90">${this.family.name}</h3>
         </div>
         ${this.renderForm()}
         ${this.renderCharacterList()}
