@@ -231,6 +231,7 @@ class FamiliesPage {
     render() {
         return `
         <h1>Welcome to Tokidoki Collection</h1>
+        <input type="button" id="sortfamilies" value="Sort Families" />
         ${this.renderForm()}
         <section id ="families">
             ${this.renderList()}
@@ -308,6 +309,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if(e.target.matches('.familiesIndex')) {
             root.innerHTML = new FamiliesPage(Family.all).render()
+        }
+        if (e.target.matches('#sortfamilies')) {
+            let sortedFamilies = Family.all.sort(function(a, b) {
+                let nameA = a.name.toUpperCase();
+                let nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+            })
+            root.innerHTML = new FamiliesPage(sortedFamilies).render()
         }
     })
     document.addEventListener('submit', (e) => {
