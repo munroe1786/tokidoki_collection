@@ -1,3 +1,6 @@
+![tokidoki is the hope the hidden energy that everyone has inside](https://user-images.githubusercontent.com/51828035/143304545-62b7dee1-5a58-4c80-a29f-40dce97e9869.jpg)
+
+
 Tokidoki Collection
 
 This app allows for creation of Tokidoki families and characters as well as viewing those families and characters.
